@@ -98,3 +98,18 @@ variants: ['before', 'after']
 })
 ]
 };
+
+#### netlify.toml (rooot)
+
+```
+[[redirects]]
+from = "/\*"
+to = "/"
+status = 200
+```
+
+#### .env.local
+
+REACT_APP_SUPABASE_URL=
+REACT_APP_SUPABASE_ANON_KEY=
+REACT_APP_SUPABASE_SERVICE_KEY=

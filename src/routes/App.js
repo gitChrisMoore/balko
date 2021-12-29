@@ -1,11 +1,16 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from '../contexts/Auth';
+import { Dashboard } from './Dashboard/Dashboard';
+
 function App() {
     return (
-        <div>
-            <h1 className="text-3xl font-bold underline">
-                {''}
-                Hello world!
-            </h1>
-        </div>
+        <Router>
+            <AuthProvider>
+                <Routes>
+                    <Route path="*" element={<Dashboard />} />
+                </Routes>
+            </AuthProvider>
+        </Router>
     );
 }
 
