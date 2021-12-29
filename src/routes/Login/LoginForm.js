@@ -36,7 +36,6 @@ function LoginForm() {
         onSubmit: handleSubmit
     });
 
-    console.log('user', user);
     return (
         <div className="max-w-md px-2 m-auto justify-center v-screen ">
             Login

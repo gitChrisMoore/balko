@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const TextField = (props) => {
-    console.log(props);
     const { id, name, label = '', children } = props;
 
     return (
