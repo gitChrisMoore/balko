@@ -1,70 +1,100 @@
-# Getting Started with Create React App
+### Purpose
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Transaction Processor
 
-## Available Scripts
+### Init App
 
-In the project directory, you can run:
+npx create-react-app@latest balko
 
-### `npm start`
+### NPM (Without MUI)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+npm i --save-dev @supabase/supabase-js moment react-router-dom @testing-library/react yup formik nyc eslint eslint-config-prettier eslint-plugin-prettier prettier eslint-plugin-testing-library @testing-library/react-hooks
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### ES Lint Setup
 
-### `npm test`
+npx eslint --init
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### .eslintrc.json
 
-### `npm run build`
+{
+"env": {
+"browser": true,
+"es2021": true
+},
+"extends": [
+"eslint:recommended",
+"plugin:react/recommended",
+"plugin:prettier/recommended"
+],
+"parserOptions": {
+"ecmaFeatures": {
+"jsx": true
+},
+"ecmaVersion": 13,
+"sourceType": "module"
+},
+"plugins": [
+"react",
+"testing-library"
+],
+"rules": {
+"react/react-in-jsx-scope": "off"
+},
+"globals": {
+"process": true
+}
+}
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### .prettierrc
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+{
+"semi": true,
+"tabWidth": 4,
+"printWidth": 100,
+"singleQuote": true,
+"trailingComma": "none",
+"jsxBracketSameLine": true
+}
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### update scripts
 
-### `npm run eject`
+"scripts": {
+"start": "react-scripts start",
+"build": "react-scripts build",
+"test": "react-scripts test",
+"coverage": "react-scripts test --coverage --watchAll",
+"eject": "react-scripts eject",
+"lint": "eslint .",
+"lint:fix": "eslint --fix",
+"format": "prettier --write './\*_/_.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+},
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### Install Tailwinds
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+npm install -D tailwindcss postcss autoprefixer tailwindcss-pseudo-elements --save-dev
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+npx tailwindcss init -p
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### tailwinds.config.js
 
-## Learn More
+const plugin = require('tailwindcss/plugin');
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+module.exports = {
+content: ['./src/**/*.{js,jsx,ts,tsx}'],
+theme: {
+extend: {}
+},
+plugins: [
+require('tailwindcss-pseudo-elements'),
+plugin(({ addUtilities }) => {
+const newUtilities = {
+'.empty-content': {
+content: "''"
+}
+};
+addUtilities(newUtilities, {
+variants: ['before', 'after']
+});
+})
+]
+};
