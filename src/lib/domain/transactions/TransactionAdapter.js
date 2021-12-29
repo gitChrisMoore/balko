@@ -36,9 +36,9 @@ export const toUiTransaction = (apiTransaction) => {
         user_id: apiTransaction.user_id,
         individuals_id: apiTransaction.individuals_id,
         accounts_id: apiTransaction.accounts_id,
-        account_products_id: apiTransaction.accountProducts_id,
+        accountProducts_id: apiTransaction.account_products_id,
 
-        createdBy: apiTransaction.createdBy,
+        createdBy: apiTransaction.created_by,
 
         effectiveDate: apiTransaction.effective_date,
         insertedAt: apiTransaction.inserted_at,

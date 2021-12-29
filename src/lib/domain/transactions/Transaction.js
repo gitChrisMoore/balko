@@ -11,6 +11,16 @@ export const createTransaction = async (newTransaction) => {
     if (error) throw error;
     return toUiTransaction(data);
 };
+export const updateToProcessed = async (tx_id) => {
+    const { data, error } = await supabase
+        .from(TBL_NAME)
+        .update({ processed: true })
+        .match({ id: tx_id })
+        .select('*')
+        .single();
+    if (error) throw error;
+    return toUiTransaction(data);
+};
 export const getTransactions = async () => {
     const { data, error } = await supabase.from(TBL_NAME).select('*');
     if (error) throw error;
@@ -19,6 +29,19 @@ export const getTransactions = async () => {
         return toUiTransaction(address);
     });
     return addresses;
+};
+export const getTxByStateDesc = async (state_description) => {
+    const { data, error } = await supabase
+        .from(TBL_NAME)
+        .select('*')
+        .eq('state_description', state_description)
+        .eq('processed', false);
+    if (error) throw error;
+
+    let transactions = data.map((transaction) => {
+        return toUiTransaction(transaction);
+    });
+    return transactions;
 };
 export const getMostRecentTransaction = async () => {
     const { data, error } = await supabase
