@@ -1,0 +1,1 @@
+CREATE POLICY "email admin" ON public.dev_transactions FOR ALL USING (((email() = 'tmptx@gmail.com'::text) OR (uid() = user_id))) WITH CHECK (((email() = 'tmptx@gmail.com'::text) OR (uid() = user_id)));
